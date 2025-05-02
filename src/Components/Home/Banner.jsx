@@ -81,7 +81,7 @@ function Banner() {
               size="lg"
               variant="outline"
               onClick={() => navigate("/about")}
-              className="text-white border-white hover:bg-white/10"
+              className="text-white bg-emerald-500 hover:bg-emerald-600"
             >
               Learn More
             </Button>
