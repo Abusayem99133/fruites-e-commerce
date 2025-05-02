@@ -15,6 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/contexts/AuthContext";
 import { ShoppingCart, ArrowLeft, Minus, Plus } from "lucide-react";
 import { toast } from "@/Hooks/UseToast";
+import { useCart } from "@/Contexts/CartContext";
 
 function FruitDetailPage() {
   const { id } = useParams();
