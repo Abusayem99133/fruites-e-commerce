@@ -1,94 +1,62 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { supabase, getCurrentUser } from "@/lib/supabase";
+import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext({
-  user: null,
-  isLoading: true,
-  isAdmin: false,
-  signIn: async () => {},
-  signUp: async () => {},
-  signOut: async () => {},
+const CartContext = createContext({
+  cartItems: [],
+  addToCart: () => {},
+  removeFromCart: () => {},
+  clearCart: () => {},
+  totalItems: 0,
+  totalPrice: 0,
 });
 
-export const useAuth = () => useContext(AuthContext);
+export const useCart = () => useContext(CartContext);
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+export function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    async function loadUser() {
-      const { user: currentUser } = await getCurrentUser();
-
-      setUser(currentUser || null);
-
-      // Check if user is admin (you would typically check a specific role)
-      if (currentUser) {
-        const { data } = await supabase
-          .from("profiles")
-          .select("is_admin")
-          .eq("id", currentUser.id)
-          .single();
-
-        setIsAdmin(data?.is_admin || false);
+  const addToCart = (product) => {
+    setCartItems((prev) => {
+      const exists = prev.find((item) => item.id === product.id);
+      if (exists) {
+        return prev.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
       }
-
-      setIsLoading(false);
-    }
-
-    loadUser();
-
-    // Set up auth listener
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        const currentUser = session?.user || null;
-        setUser(currentUser);
-
-        if (currentUser) {
-          const { data } = await supabase
-            .from("profiles")
-            .select("is_admin")
-            .eq("id", currentUser.id)
-            .single();
-
-          setIsAdmin(data?.is_admin || false);
-        } else {
-          setIsAdmin(false);
-        }
-
-        setIsLoading(false);
-      }
-    );
-
-    return () => {
-      authListener?.subscription?.unsubscribe();
-    };
-  }, []);
-
-  const value = {
-    user,
-    isLoading,
-    isAdmin,
-    signIn: async (email, password) => {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      return { data, error };
-    },
-    signUp: async (email, password) => {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      return { data, error };
-    },
-    signOut: async () => {
-      const { error } = await supabase.auth.signOut();
-      return { error };
-    },
+      return [...prev, { ...product, quantity: 1 }];
+    });
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const removeFromCart = (productId) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const clearCart = () => setCartItems([]);
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.quantity * item.price,
+    0
+  );
+
+  const value = {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    totalItems,
+    totalPrice,
+  };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

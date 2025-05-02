@@ -23,7 +23,6 @@ export function AuthProvider({ children }) {
 
       setUser(currentUser || null);
 
-      // Check if user is admin (you would typically check a specific role)
       if (currentUser) {
         const { data } = await supabase
           .from("profiles")
@@ -39,7 +38,6 @@ export function AuthProvider({ children }) {
 
     loadUser();
 
-    // Set up auth listener
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         const currentUser = session?.user || null;

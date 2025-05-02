@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Trash2, Plus, Minus, ShoppingCart, ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "@/Hooks/UseToast";
+import { useCart } from "@/Contexts/CartContext";
 
 function CartPage() {
-  const { items, removeItem, updateQuantity, cartTotal, clearCart } = useCart();
+  const { cartItems, removeItem, updateQuantity, cartTotal, clearCart } =
+    useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -37,7 +39,7 @@ function CartPage() {
     navigate("/checkout");
   };
 
-  if (items.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="min-h-screen pt-24 pb-12 bg-gray-50">
         <div className="container mx-auto px-4">
