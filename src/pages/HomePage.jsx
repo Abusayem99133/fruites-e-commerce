@@ -3,8 +3,11 @@ import FeaturedFruits from "@/components/fruits/FeaturedFruits";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Truck, Award, Clock, Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/Contexts/AuthContext";
 
 function HomePage() {
+  const { user } = useAuth();
+  // console.log("user name ", user);
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Banner */}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFruits } from "@/lib/supabase";
+import { getFruits } from "../../lib/supabase";
 import FruitCard from "./FruitCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,16 +9,20 @@ function FeaturedFruits() {
   const [fruits, setFruits] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
   useEffect(() => {
+    // console.log("useEffect inside FeaturedFruits running"); // ✅
+
     const loadFruits = async () => {
+      // console.log("Calling getFruits()..."); // ✅
       setLoading(true);
       const { fruits, error } = await getFruits();
+
+      // console.log("Fetched fruits:", fruits); // ✅
+      // console.log("Fetch error:", error); // ✅
 
       if (error) {
         console.error("Error loading fruits:", error);
       } else {
-        // Get only first 8 fruits for featured section
         setFruits(fruits?.slice(0, 8) || []);
       }
 
@@ -27,6 +31,24 @@ function FeaturedFruits() {
 
     loadFruits();
   }, []);
+
+  // useEffect(() => {
+  //   const loadFruits = async () => {
+  //     setLoading(true);
+  //     const { fruits, error } = await getFruits();
+
+  //     if (error) {
+  //       console.error("Error loading fruits:", error);
+  //     } else {
+  //       // Get only first 8 fruits for featured section
+  //       setFruits(fruits?.slice(0, 8) || []);
+  //     }
+
+  //     setLoading(false);
+  //   };
+
+  //   loadFruits();
+  // }, []);
 
   // If we have no fruits data and are not in a loading state,
   // this means we either have an error or there is no fruits data
@@ -58,7 +80,7 @@ function FeaturedFruits() {
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {loadingSkeletons.map((_, index) => (
+            {loadingSkeletons?.map((_, index) => (
               <div
                 key={index}
                 className="bg-white rounded-lg overflow-hidden shadow-md p-4"
@@ -75,7 +97,7 @@ function FeaturedFruits() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {fruits.map((fruit) => (
+            {fruits?.map((fruit) => (
               <FruitCard key={fruit.id} fruit={fruit} />
             ))}
           </div>

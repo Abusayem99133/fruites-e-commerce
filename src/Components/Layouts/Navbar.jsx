@@ -42,7 +42,7 @@ function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white text-black shadow-md py-2"
+          ? "bg-white text-black shadow-md py-2 "
           : "bg-transparent text-white py-4"
       }`}
     >

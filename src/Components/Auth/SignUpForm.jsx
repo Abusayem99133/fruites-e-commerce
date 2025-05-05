@@ -60,7 +60,7 @@ function SignUpForm() {
       }
 
       // Navigate to success page
-      navigate("/signup-success");
+      navigate("/");
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
       console.error(err);

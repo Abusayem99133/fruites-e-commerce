@@ -36,7 +36,7 @@ function UserDashboard() {
   const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  // console.log("user name", user);
   useEffect(() => {
     const loadOrders = async () => {
       if (!user) return;

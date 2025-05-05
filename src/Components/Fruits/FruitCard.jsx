@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "@/Hooks/UseToast";
 
 function FruitCard({ fruit }) {
-  const { id, name, price, image, inStock } = fruit;
+  const { id, name, price, image, instock } = fruit;
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ function FruitCard({ fruit }) {
       return;
     }
 
-    if (!inStock) {
+    if (!instock) {
       toast({
         title: "Out of stock",
         description: "Sorry, this item is currently unavailable",
@@ -32,7 +32,6 @@ function FruitCard({ fruit }) {
       });
       return;
     }
-
     addItem(fruit);
     toast({
       title: "Added to cart",
@@ -47,10 +46,11 @@ function FruitCard({ fruit }) {
     }).format(price);
   };
 
+  // console.log("in stock ", instock, fruit.instock, "fruits");
   return (
     <div className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
       {/* Stock label */}
-      {!inStock && (
+      {!instock && (
         <div className="absolute top-2 right-2 z-10 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
           Out of Stock
         </div>
@@ -81,15 +81,15 @@ function FruitCard({ fruit }) {
             <Eye className="mr-1 h-4 w-4" /> Details
           </Button>
           <Button
-            variant={inStock ? "default" : "secondary"}
+            variant={instock ? "default" : "secondary"}
             size="sm"
             className={`w-full ${
-              inStock
+              instock
                 ? "bg-emerald-500 hover:bg-emerald-600"
                 : "bg-gray-300 cursor-not-allowed"
             }`}
             onClick={handleAddToCart}
-            disabled={!inStock}
+            disabled={!instock}
           >
             <ShoppingCart className="mr-1 h-4 w-4" /> Add
           </Button>

@@ -79,7 +79,6 @@ function Banner() {
             </Button>
             <Button
               size="lg"
-              variant="outline"
               onClick={() => navigate("/about")}
               className="text-white bg-emerald-500 hover:bg-emerald-600"
             >

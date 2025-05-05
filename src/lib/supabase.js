@@ -39,6 +39,8 @@ export const getFruits = async () => {
     .from("fruits")
     .select("*")
     .order("name");
+  // console.log("Data from Supabase:", data);
+  // console.log("Error from Supabase:", error);
   return { fruits: data, error };
 };
 
