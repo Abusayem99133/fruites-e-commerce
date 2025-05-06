@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-24 pt-32">
