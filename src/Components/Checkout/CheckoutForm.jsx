@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import { createOrder } from "@/lib/supabase";
 import { toast } from "@/Hooks/UseToast";
 

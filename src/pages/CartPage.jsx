@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, Minus, ShoppingCart, ArrowRight } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import { toast } from "@/Hooks/UseToast";
 import { useCart } from "@/Contexts/CartContext";
 

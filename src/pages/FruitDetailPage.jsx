@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import { ShoppingCart, ArrowLeft, Minus, Plus } from "lucide-react";
 import { toast } from "@/Hooks/UseToast";
 import { useCart } from "@/Contexts/CartContext";

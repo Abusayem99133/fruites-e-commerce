@@ -10,7 +10,7 @@ import {
   Apple,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import {
   DropdownMenu,
   DropdownMenuContent,

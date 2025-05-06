@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import { toast } from "@/Hooks/UseToast";
 
 function CheckoutPage() {

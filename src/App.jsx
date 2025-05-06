@@ -5,8 +5,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { AuthProvider } from "@/contexts/AuthContext";
-
 // Layout
 
 // Pages
@@ -23,6 +21,9 @@ import SignUpPage from "@/pages/auth/SignUpPage";
 import SignUpSuccessPage from "@/pages/auth/SignUpSuccessPage";
 import Layout from "./Components/Layouts/Layout";
 import { Toaster } from "./Components/ui/sonner";
+import { AuthProvider } from "./Contexts/AuthContext";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
@@ -53,6 +54,8 @@ function App() {
               path="admin"
               element={<ProtectedRoute element={<AdminDashboard />} />}
             />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="about" element={<AboutPage />} />
             <Route path="order-success" element={<OrderSuccessPage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />

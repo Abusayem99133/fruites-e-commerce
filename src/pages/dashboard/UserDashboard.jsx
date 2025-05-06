@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getOrders } from "@/lib/supabase";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import {
   Card,
   CardContent,

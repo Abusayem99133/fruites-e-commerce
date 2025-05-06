@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/Contexts/AuthContext";
 import { toast } from "@/Hooks/UseToast";
 
 function FruitCard({ fruit }) {
