@@ -1,4 +1,4 @@
-import SignInForm from "@/components/auth/SignInForm";
+import SignInForm from "@/Components/Auth/SignInForm";
 
 function SignInPage() {
   return <SignInForm />;
